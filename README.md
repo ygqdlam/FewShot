@@ -11,8 +11,16 @@
 HF-SAM：使用的是Synapse数据集
 AutoSAM：使用的是ACDC和Synapse，本项目需要使用ACDC进行实验。后续可以添加一个器官分割的数据集。
 ```
----
 
+python scripts/main_autosam_seg.py --src_dir ./data/ACDC \
+--data_dir ./data/ACDC/imgs/ --save_dir ./results/ACDC  \
+--b 4 --dataset ACDC --gpu 0 \
+--fold 0 --tr_size 1  --model_type vit_h --num_classes 4
+
+
+
+
+---
 ## Citation
 ### AutoSAM
 链接：
@@ -28,3 +36,5 @@ github:https://github.com/xhu248/AutoSAM
   year={2023}
 }
 ```
+
+
