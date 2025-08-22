@@ -23,17 +23,29 @@ PYTHONPATH=$(pwd) python scripts/main_autosam_seg.py \
 
 ---
 ## Citation
-### AutoSAM
+### HF-SAM
 链接：
 ```bash
-github:https://github.com/xhu248/AutoSAM
+https://github.com/1683194873xrn/HF-SAM/tree/main
+```
+```bash
+https://github.com/HuCaoFighting/Swin-Unet/tree/main
 ```
 引用：
 ```bash
-@article{hu2023efficiently,
-  title={How to Efficiently Adapt Large Segmentation Model (SAM) to Medical Images},
-  author={Hu, Xinrong and Xu, Xiaowei and Shi, Yiyu},
-  journal={arXiv preprint arXiv:2306.13731},
-  year={2023}
+@InProceedings{swinunet,
+author = {Hu Cao and Yueyue Wang and Joy Chen and Dongsheng Jiang and Xiaopeng Zhang and Qi Tian and Manning Wang},
+title = {Swin-Unet: Unet-like Pure Transformer for Medical Image Segmentation},
+booktitle = {Proceedings of the European Conference on Computer Vision Workshops(ECCVW)},
+year = {2022}
+}
+
+@misc{cao2021swinunet,
+      title={Swin-Unet: Unet-like Pure Transformer for Medical Image Segmentation}, 
+      author={Hu Cao and Yueyue Wang and Joy Chen and Dongsheng Jiang and Xiaopeng Zhang and Qi Tian and Manning Wang},
+      year={2021},
+      eprint={2105.05537},
+      archivePrefix={arXiv},
+      primaryClass={eess.IV}
 }
 ```
