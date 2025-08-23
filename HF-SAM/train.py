@@ -6,7 +6,7 @@ import torch
 import torch.backends.cudnn as cudnn
 from sam_lora_image_encoder_mask_decoder import LoRA_Sam
 
-from trainer import trainer_synapse
+from trainer import trainer_synapse,trainer_acdc
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--root_path', type=str,
@@ -67,7 +67,7 @@ parser.add_argument("--warmup", default=False, type=bool)
 parser.add_argument("--AdamW", default=True, type=bool)
 
 parser.add_argument('--stop_epoch', type=int,
-                    default=150, help='maximum epoch number to train')
+                    default=3000, help='maximum epoch number to train')
 
 parser.add_argument('--dice_param', type=float,
                     default=0.8, help='maximum epoch number to train')
@@ -75,6 +75,10 @@ parser.add_argument('--dice_param', type=float,
 args = parser.parse_args()
 if args.dataset == "Synapse":
     args.root_path = os.path.join(args.root_path, "train_npz")
+if args.dataset == "ACDC":
+    #args.root_path = os.path.join(args.root_path, "train_slices")
+    args.root_path = os.path.join(args.root_path)
+
 
 if __name__ == "__main__":
     if not args.deterministic:
@@ -112,12 +116,13 @@ if __name__ == "__main__":
     from segment_anything import sam_model_registry
     net = sam_model_registry["vit_b"](image_size=args.img_size, num_classes=args.num_classes, 
                                       checkpoint="/home/yanggq/project/Few-shot/checkpoints/sam_vit_b_01ec64.pth")[0]
-    print("11111111111111111",net)
     lora_sam = LoRA_Sam(net, 4).cuda()
     #lora_sam.sam.image_encoder(torch.rand(size=(1, 3, 1024, 1024)))
 
     # trainer = {'Synapse': trainer_synapse}
-    trainer_synapse(args, lora_sam, args.output_dir, args.multimask_output, args.low_res)
+    #trainer_synapse(args, lora_sam, args.output_dir, args.multimask_output, args.low_res)
 
+    trainer = {'Synapse': trainer_synapse,'ACDC': trainer_acdc,}
+    trainer[dataset_name](args, lora_sam, args.output_dir, args.multimask_output, args.low_res)
 
 # python train.py --output_dir ./model_out/datasets --dataset datasets --img_size 224 --batch_size 32 --cfg configs/swin_tiny_patch4_window7_224_lite.yaml --root_path /media/aicvi/11111bdb-a0c7-4342-9791-36af7eb70fc0/NNUNET_OUTPUT/nnunet_preprocessed/Dataset001_mm/nnUNetPlans_2d_split

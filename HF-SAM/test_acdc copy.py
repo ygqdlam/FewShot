@@ -18,15 +18,10 @@ from datasets.dataset_acdc import BaseDataSets
 from icecream import ic
 
 
-class_to_acdcname = {1: 'Right Ventricle', 2: 'Myocardium of the Left Ventricle', 3: 'Left Ventricle cavity'}
-class_to_synapsename = {1: 'spleen', 2: 'right kidney', 3: 'left kidney', 4: 'gallbladder', 5: 'liver', 6: 'stomach', 7: 'aorta', 8: 'pancreas'}
+class_to_name = {1: 'Right Ventricle', 2: 'Myocardium of the Left Ventricle', 3: 'Left Ventricle cavity'}
+
 
 def inference(args, multimask_output, db_config, model, test_save_path=None):
-    if db_config['Dataset'] == 'ACDC':
-        class_to_name = class_to_acdcname
-    else:
-        class_to_name = class_to_synapsename
-
     db_test = db_config['Dataset'](base_dir=args.volume_path, list_dir=args.list_dir, split='test_vol')
     testloader = DataLoader(db_test, batch_size=1, shuffle=False, num_workers=1)
     logging.info(f'{len(testloader)} test iterations per epoch')
@@ -101,16 +96,11 @@ def config_to_dict(config):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--config', type=str, default=None, help='The config file provided by the trained model')
-    parser.add_argument('--dataset', type=str, default='ACDC', help='Experiment name')
-    #parser.add_argument('--dataset', type=str, default='Synapse', help='Experiment name')
-
     parser.add_argument('--volume_path', type=str, default='datasets/ACDC/test_vol')
+    parser.add_argument('--dataset', type=str, default='ACDC', help='Experiment name')
     parser.add_argument('--num_classes', type=int, default=4)
     parser.add_argument('--list_dir', type=str, default='./lists/ACDC/', help='list_dir')
     parser.add_argument('--output_dir', type=str, default='./output_acdc')
-    parser.add_argument('--lora_ckpt', type=str, default='model_acdc_out/epoch_549.pth', help='The checkpoint from LoRA')
-
-  
     parser.add_argument('--img_size', type=int, default=224, help='Input image size of the network')
     parser.add_argument('--input_size', type=int, default=224, help='The input size for training SAM model')
     parser.add_argument('--seed', type=int,default=2345, help='random seed')
@@ -118,6 +108,7 @@ if __name__ == '__main__':
     parser.add_argument('--deterministic', type=int, default=1, help='whether use deterministic training')
     parser.add_argument('--ckpt', type=str, default='/home/yanggq/project/Few-shot/checkpoints/sam_vit_b_01ec64.pth',
                         help='Pretrained checkpoint')
+    parser.add_argument('--lora_ckpt', type=str, default='model_out/epoch_124.pth', help='The checkpoint from LoRA')
     parser.add_argument('--vit_name', type=str, default='vit_b', help='Select one vit model')
     parser.add_argument('--rank', type=int, default=6, help='Rank for LoRA adaptation')
     parser.add_argument('--module', type=str, default='sam_lora_image_encoder_mask_decoder')
@@ -125,12 +116,6 @@ if __name__ == '__main__':
     parser.add_argument('--mode',  type=str, default='test')
 
     args = parser.parse_args()
-    if args.dataset != 'ACDC':
-        args.volume_path = 'datasets/Synapse/test_vol_h5'
-        args.num_classes = 9
-        args.list_dir = './lists/Synapse/'
-        args.output_dir = 'datasets/Synapse/test_vol_h5'
-
 
     if args.config is not None:
         # overwtite default configurations with config file\

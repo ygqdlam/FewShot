@@ -22,7 +22,7 @@ class BaseDataSets(Dataset):
         train_ids, val_ids, test_ids = self._get_ids()
         if self.split.find('train') != -1:
             self.all_slices = os.listdir(
-                self._base_dir + "/ACDC_training_slices")
+                self._base_dir + "/train_slices")
             self.sample_list = []
             for ids in train_ids:
                 new_data_list = list(filter(lambda x: re.match('{}.*'.format(ids), x) != None, self.all_slices))
@@ -30,7 +30,7 @@ class BaseDataSets(Dataset):
 
         elif self.split.find('val') != -1:
             self.all_volumes = os.listdir(
-                self._base_dir + "/ACDC_training_volumes")
+                self._base_dir + "/test_vol")
             self.sample_list = []
             for ids in val_ids:
                 new_data_list = list(filter(lambda x: re.match('{}.*'.format(ids), x) != None, self.all_volumes))
@@ -38,7 +38,7 @@ class BaseDataSets(Dataset):
 
         elif self.split.find('test') != -1:
             self.all_volumes = os.listdir(
-                self._base_dir + "/ACDC_training_volumes")
+                self._base_dir )
             self.sample_list = []
             for ids in test_ids:
                 new_data_list = list(filter(lambda x: re.match('{}.*'.format(ids), x) != None, self.all_volumes))
@@ -66,15 +66,16 @@ class BaseDataSets(Dataset):
         # label = h5f['label'][:]
         # sample = {'image': image, 'label': label}
         if self.split == "train":
-            h5f = h5py.File(self._base_dir + "/ACDC_training_slices/{}".format(case), 'r')
+            h5f = h5py.File(self._base_dir + "/train_slices/{}".format(case), 'r')
             image = h5f['image'][:]
             label = h5f['label'][:]  # fix sup_type to label
             sample = {'image': image, 'label': label}
             sample = self.transform(sample)
         else:
-            h5f = h5py.File(self._base_dir + "/ACDC_training_volumes/{}".format(case), 'r')
-            image = h5f['image'][:]
-            label = h5f['label'][:]
+            vol_name = self.sample_list[idx].strip('\n')
+            filepath = self._base_dir + "/{}".format(vol_name)
+            data = h5py.File(filepath)
+            image, label = data['image'][:], data['label'][:]
             sample = {'image': image, 'label': label}
         sample["idx"] = idx
         sample['case_name'] = case.replace('.h5', '')
@@ -98,29 +99,70 @@ def random_rotate(image, label):
     return image, label
 
 
-class RandomGenerator(object):
+class RandomGenerator2(object):
     def __init__(self, output_size):
         self.output_size = output_size
 
     def __call__(self, sample):
         image, label = sample['image'], sample['label']
-        # ind = random.randrange(0, img.shape[0])
-        # image = img[ind, ...]
-        # label = lab[ind, ...]
+
         if random.random() > 0.5:
             image, label = random_rot_flip(image, label)
         elif random.random() > 0.5:
             image, label = random_rotate(image, label)
         x, y = image.shape
         if x != self.output_size[0] or y != self.output_size[1]:
-            image = zoom(image, (self.output_size[0] / x, self.output_size[1] / y), order=0)  # the default is 0
-            label = zoom( label, (self.output_size[0] / x, self.output_size[1] / y), order=0)
-
-        assert (image.shape[0] == self.output_size[0]) and (image.shape[1] == self.output_size[1])
+            image = zoom(image, (self.output_size[0] / x, self.output_size[1] / y), order=3)  # why not 3?
+            label = zoom(label, (self.output_size[0] / x, self.output_size[1] / y), order=0)
         image = torch.from_numpy(image.astype(np.float32)).unsqueeze(0)
-        label = torch.from_numpy(label.astype(np.uint8))
-        sample = {'image': image, 'label': label}
+        label = torch.from_numpy(label.astype(np.float32))
+        sample = {'image': image, 'label': label.long()}
         return sample
+
+
+
+class RandomGenerator(object):
+    def __init__(self, output_size, low_res=None):
+        """
+        output_size: [H, W] 训练输入/输出分辨率
+        low_res:     [h_low, w_low] 低分辨率标签大小（例如 [112,112]）。
+                     若为 None，则不返回 low_res_label。
+        """
+        self.output_size = output_size
+        self.low_res = low_res
+
+    def __call__(self, sample):
+        image, label = sample['image'], sample['label']
+
+        # 原有随机增强（保持不变）
+        if random.random() > 0.5:
+            image, label = random_rot_flip(image, label)
+        elif random.random() > 0.5:
+            image, label = random_rotate(image, label)
+
+        # 尺度统一到 output_size（保持不变）
+        x, y = image.shape
+        if x != self.output_size[0] or y != self.output_size[1]:
+            image = zoom(image, (self.output_size[0] / x, self.output_size[1] / y), order=3)  # 图像用三次插值
+            label = zoom(label, (self.output_size[0] / x, self.output_size[1] / y), order=0)  # 标签用最近邻
+
+        # === 新增：生成低分辨率标签（仅在需要时） ===
+        low_res_label = None
+        if self.low_res is not None:
+            H, W = self.output_size
+            h_low, w_low = self.low_res
+            # 对 label 做最近邻下采样，避免类别被插值破坏
+            low_res_label = zoom(label, (h_low / H, w_low / W), order=0)
+
+        # 打包张量（保持不变）
+        image = torch.from_numpy(image.astype(np.float32)).unsqueeze(0)
+        label = torch.from_numpy(label.astype(np.float32))
+
+        sample_out = {'image': image, 'label': label.long()}
+        if low_res_label is not None:
+            sample_out['low_res_label'] = torch.from_numpy(low_res_label.astype(np.int64))
+        return sample_out
+    
 
 
 def iterate_once(iterable):
