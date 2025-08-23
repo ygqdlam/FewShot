@@ -3,21 +3,10 @@
 ## HF-SAM
 ```bash
 HF-SAM：使用的是ACDC和Synapse。
+```
 
-```
 ```bash
-python scripts/main_autosam_seg.py --src_dir ./data/ACDC \
---data_dir ./data/ACDC/imgs/ --save_dir ./results/ACDC  \
---b 4 --dataset ACDC --gpu 0 \
---fold 0 --tr_size 1  --model_type vit_h --num_classes 4
-```
-```bash
-PYTHONPATH=$(pwd) python scripts/main_autosam_seg.py \
-  --src_dir ./data/ACDC \
-  --data_dir ./data/ACDC/imgs/ \
-  --save_dir ./results/ACDC \
-  --b 4 --dataset ACDC --gpu 0 --fold 0 --tr_size 1 \
-  --model_type vit_b --num_classes 4
+sh train_synapse.sh
 ```
 
 
