@@ -53,7 +53,7 @@ Mean class 4 name gallbladder mean_dice 0.000000 mean_hd95 0.000000 mean_jaccard
 Testing performance in best val model: mean_dice : 0.224164 mean_hd95 : 12.794635 mean_jaccard 0.156628 mean_asd 7.030593 mean_recall 0.275042 mean_specificity 0.275042 mean_precision 0.211830
 Testing Finished!
 ```
-Nypsnase数据集的第549epoch结果：
+Nypsnase数据集的第1999epoch结果：
 ```bash
 Namespace(config=None, dataset='Synapse', volume_path='datasets/Synapse/test_vol_h5', num_classes=9, list_dir='./lists/Synapse/', output_dir='datasets/Synapse/test_vol_h5', lora_ckpt='model_synapse_out/epoch_1999.pth', img_size=224, input_size=224, seed=2345, is_savenii=False, deterministic=1, ckpt='/home/yanggq/project/Few-shot/checkpoints/sam_vit_b_01ec64.pth', vit_name='vit_b', rank=6, module='sam_lora_image_encoder_mask_decoder', stage=3, mode='test')
 12 test iterations per epoch
