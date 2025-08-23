@@ -1,5 +1,6 @@
 
 # H-SAM
+---
 ## result
 ### Synapse
 自己训练的
@@ -43,15 +44,13 @@ Namespace(config=None, volume_path='datasets/Synapse/test_vol_h5', dataset='Syna
 5it [13:14, 166.07s/it]idx 5 case case0029 mean_dice 0.058383 mean_hd95 114.931074
 6it [15:05, 147.32s/it]idx 6 case case0003 mean_dice 0.046036 mean_hd95 131.597184
 7it [19:08, 178.49s/it]
-
-
 ```
 
 
 
 
 
-
+---
 ## Citation
 ```bash
 https://github.com/Cccccczh404/H-SAM/tree/main
