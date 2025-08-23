@@ -3,7 +3,7 @@
 ---
 ## HF-SAM
 ```bash
-HF-SAM：使用的是ACDC和Synapse。
+HF-SAM：使用的是ACDC和Synapse。(复现结论：代码跟H-SAM完全一样，缺少关键代码复现不出来，可以直接复现H-SAM)
 ```
 
 数据集的目录结构：
