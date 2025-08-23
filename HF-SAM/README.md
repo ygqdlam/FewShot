@@ -9,21 +9,21 @@ HF-SAM：使用的是ACDC和Synapse。
 数据集的目录结构：
 ```bash
 HF-SAM-main
-  datasets
-    Synapse
-      train_npz
-         case0005_slice000.npz
-         xxxx
-      test_vol_h5
-         case0001.npy.h5
-    ACDC
-      ACDC_training_slices
-         patient001_frame01_slice_0.h5
-         xxxx
-      ACDC_training_volumes
-         patient001_frame01.h5
+--datasets
+----Synapse
+------train_npz
+---------case0005_slice000.npz
+---------xxxx
+------test_vol_h5
+---------case0001.npy.h5
+----ACDC
+------ACDC_training_slices
+---------patient001_frame01_slice_0.h5
+---------xxxx
+------ACDC_training_volumes
+---------patient001_frame01.h5
 ```
-
+运行命令
 ```bash
 sh train_synapse.sh
 ```
