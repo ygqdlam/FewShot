@@ -4,19 +4,19 @@
 ---
 
 ## 1.数据路径
-MedCLIP-SAM
-  data
-    brain_tumors
-      train_images
-        000.png
-      train_masks
-        000.png
-      test_images
-      test_masks
-      val_images
-      val_masks
-    breast_tumors
-
+MedCLIP-SAM<br>
+  data<br>
+    brain_tumors<br>
+      train_images<br>
+        000.png<br>
+      train_masks<br>
+        000.png<br>
+      test_images<br>
+      test_masks<br>
+      val_images<br>
+      val_masks<br>
+    breast_tumors<br>
+    
 ---
 
 ## 2.运行命令
