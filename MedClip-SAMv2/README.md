@@ -4,6 +4,7 @@
 ---
 
 ## 1.数据路径
+```bash
 MedCLIP-SAM
   data
     brain_tumors
@@ -16,7 +17,7 @@ MedCLIP-SAM
       val_images
       val_masks
     breast_tumors
-
+```
 ---
 
 ## 2.运行命令
