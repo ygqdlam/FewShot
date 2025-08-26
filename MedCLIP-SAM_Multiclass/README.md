@@ -103,8 +103,6 @@ IMG_EXTS = (".png", ".jpg", ".jpeg", ".bmp", ".tif", ".tiff")
 该文件修改内容过多，已重新写一个文件，eval_synapse.py:
 
 
-
----
 ### 3.可视化
 新增了visual文件夹，运行以下命令进行可视化：
 ```bash
