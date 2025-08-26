@@ -1,0 +1,112 @@
+{
+  "case0001_slice100.png": {
+    "Liver": "The liver appears as a large, wedge-shaped organ occupying most of the upper right abdominal quadrant, positioned directly beneath the diaphragm and extending downward toward the right kidney, which lies slightly posterior and inferior to it.",
+    "Spleen": "The spleen in the upper left abdomen appears crescent-shaped, relatively small compared to surrounding organs, positioned superiorly and laterally to the left kidney, and closely adjacent to the diaphragm.",
+    "Pancreas": "The pancreas appears elongated and slightly curved, positioned horizontally behind the stomach, extending near the spine with proximity to surrounding organs such as the kidneys and liver.",
+    "Right kidney": "The right kidney, bean-shaped and approximately the size of a closed fist, is located in the right retroperitoneal space, positioned inferior to the liver and adjacent to the ascending colon with close spatial proximity to both structures.",
+    "Left kidney": "The left kidney, seen in the image as a bean-shaped organ located in the left retroperitoneal space, is positioned lateral to the vertebral column and inferior to the diaphragm, with its superior pole closer to the diaphragm and its medial border facing the vertebral column.",
+    "Stomach": "The stomach appears as a curved, hollow structure situated in the upper abdomen below the diaphragm, positioned predominantly to the left of the liver and adjacent to the spleen on its left side.",
+    "Gallbladder": "The gallbladder is pear-shaped, small, positioned underneath the right lobe of the liver, located anterior to the right kidney, and lies in proximity to the duodenum, with clear spatial separation from both the kidney and duodenum.",
+    "Aorta": "The aorta appears as a round, tubular structure of moderate size positioned centrally in the abdomen, located posterior to the stomach and just anterior to the spine with minimal distance separating it from the vertebral column."
+  },
+  "case0001_slice101.png": {
+    "Liver": "The liver appears as a large, wedge-shaped organ occupying the upper right abdomen, closely positioned beneath the diaphragm and situated anterior and slightly superior to the right kidney.",
+    "Spleen": "The spleen is a crescent-shaped organ located in the upper left abdomen, positioned near the diaphragm superiorly and sitting adjacent to and slightly anterior to the upper pole of the left kidney.",
+    "Pancreas": "The pancreas is an elongated, lobulated organ positioned horizontally behind the stomach, nestled close to the spine, with its head near the duodenum on the right and tail extending toward the spleen on the left, surrounded by the kidneys and major blood vessels.",
+    "Right kidney": "The right kidney appears bean-shaped, moderately sized, and positioned in the right retroperitoneal space, with its superior pole situated close to the liver and its medial border in proximity to the ascending colon, separated by soft tissue structures.",
+    "Left kidney": "The left kidney is bean-shaped, moderately sized, positioned obliquely in the left retroperitoneal space near the vertebral column, with its upper pole closely approximating the diaphragm and its lower pole extending downward away from it.",
+    "Stomach": "The stomach is J-shaped, moderately sized, located in the upper left abdomen, positioned close to the diaphragm superiorly, near the liver on the right, and adjacent to the spleen on the left.",
+    "Gallbladder": "The gallbladder has a pear-shaped structure, is relatively small, located beneath the liver's right lobe, situated anterior to the right kidney and close to the duodenum, with both organs positioned in proximity but not directly adjoining.",
+    "Aorta": "The aorta is tubular in shape, moderately sized, centrally positioned in the abdomen, located posterior to the stomach and directly anterior to the spine."
+  },
+  "case0001_slice102.png": {
+    "Liver": "The liver has a large, wedge-like shape situated in the upper right abdomen, closely positioned under the diaphragm and extending to cover part of the right kidney on its lower side.",
+    "Spleen": "In this CT image, the spleen appears as a curved, oval-shaped organ located in the upper left quadrant of the abdomen, with a size proportionate to the adjacent structures, positioned closely to the diaphragm above and slightly lateral and superior to the left kidney.",
+    "Pancreas": "The pancreas is elongated and irregularly shaped, situated behind the stomach and in close proximity to the spine, nestled between the kidneys and surrounded by other abdominal organs.",
+    "Right kidney": "The right kidney is bean-shaped, moderately sized, positioned in the right retroperitoneal space, situated inferior to the liver, and adjacent to the medial aspect of the ascending colon.",
+    "Left kidney": "The left kidney is a bean-shaped organ located in the left retroperitoneal space, lying laterally to the vertebral column, inferiorly and slightly anterior to the diaphragm, with its superior pole closer to the diaphragm and its medial border rotated towards the vertebrae.",
+    "Stomach": "The stomach in the image appears as a curved, hollow organ located in the upper abdomen, positioned near and partially beneath the diaphragm, adjacent to the liver on the right, and in close proximity to the spleen on the left side.",
+    "Gallbladder": "The gallbladder appears as a small, elongated, and pear-shaped structure located beneath the right lobe of the liver, anterior to the right kidney and superior to the duodenum, with a spatial orientation that positions it close to these structures but not in direct contact.",
+    "Aorta": "The aorta appears cylindrical in shape, is located centrally within the abdomen, is positioned anterior to the spine and posterior to the stomach, and maintains a close and direct proximity to both structures."
+  },
+  "case0001_slice103.png": {
+    "Liver": "The liver in this axial image appears large, wedge-shaped, occupying the upper right abdomen just beneath the diaphragm, and is positioned anterior and superior to the right kidney with close proximity.",
+    "Spleen": "The spleen is a curved, crescent-shaped organ located in the upper left abdomen, positioned lateral and slightly posterior to the left kidney, and just inferior to the diaphragm.",
+    "Pancreas": "In the image, the pancreas appears as a narrow, elongated organ positioned horizontally behind the stomach, close to the spine, nestled between the kidneys and other surrounding structures such as the duodenum and major blood vessels.",
+    "Right kidney": "The right kidney appears bean-shaped and appropriately sized, positioned vertically in the right retroperitoneal space, closely abutting the liver superiorly and partially overlapping with the ascending colon medially and inferiorly.",
+    "Left kidney": "The left kidney appears bean-shaped and is located in the left retroperitoneal space, positioned parallel to the vertebral column and slightly anterior and inferior to the diaphragm, with its superior pole closer to the diaphragm and its medial border angled toward the vertebral column.",
+    "Stomach": "The stomach in this axial CT image appears as a curved, elongated structure in the left upper abdomen, positioned inferior to the diaphragm, adjacent and medial to the spleen, and located just to the left of the liver.",
+    "Gallbladder": "The gallbladder appears as a small, elongated, and pear-shaped organ positioned beneath the right lobe of the liver, lying anterior to the right kidney and in close proximity to the duodenum.",
+    "Aorta": "The aorta in this image is cylindrical in shape, located centrally within the abdomen just anterior to the spine, relatively close to the vertebral column and posterior to the stomach, which appears slightly displaced to the left."
+  },
+  "case0001_slice104.png": {
+    "Liver": "The liver appears as a large, roughly triangular organ occupying the upper right abdomen, positioned immediately below the diaphragm and anterior to the right kidney, with close proximity to both structures as shown in the cross-sectional image.",
+    "Spleen": "The spleen, located in the upper left abdomen, appears ovoid in shape with a moderate size, positioned closely to the left kidney inferiorly and the diaphragm superiorly, maintaining a slight separation from both structures.",
+    "Pancreas": "The pancreas appears elongated and somewhat flattened, nestled horizontally behind the stomach, extending between the curve of the duodenum on the right and partially toward the spleen on the left, close to the spine and surrounded by major organs such as the kidneys and liver in this cross-sectional image.",
+    "Right kidney": "The right kidney has a bean-like shape and is moderately sized, positioned in the right retroperitoneal space, closely situated inferior to the liver and adjacent to the ascending colon.",
+    "Left kidney": "The left kidney in the image has a bean-shaped appearance, is positioned within the left retroperitoneal space, with its superior pole bordering the diaphragm and closely located to the vertebral column medially.",
+    "Stomach": "The stomach appears as a hollow, elongated organ situated in the upper abdomen, positioned beneath the diaphragm, adjacent to the left lobe of the liver on its anterior-right side, and closely associated with the spleen on its posterior-left side.",
+    "Gallbladder": "The gallbladder is a small, pear-shaped organ positioned beneath the liver, located anterior to the right kidney and close to the duodenum, with short relative distances between all three structures.",
+    "Aorta": "The aorta in the abdomen appears as a circular structure with a uniform lumen, positioned centrally and slightly to the left, closely anterior to the spine and posterior to the stomach, with minimal separation from both structures."
+  },
+  "case0001_slice105.png": {
+    "Liver": "The liver appears as a large, irregularly wedge-shaped organ occupying the upper right abdomen, positioned just below the diaphragm and extending close to the right kidney, separated by a small distance.",
+    "Spleen": "The spleen is a crescent-shaped organ located in the upper left abdomen, appearing moderate-sized and positioned adjacent to the left kidney posteriorly and slightly inferior to the diaphragm.",
+    "Pancreas": "The pancreas is elongated, tapering in shape, nestled horizontally behind the stomach, situated anterior to the spine and closely surrounded by vital structures including the kidneys on both sides and major blood vessels.",
+    "Right kidney": "The right kidney is bean-shaped and moderate in size, situated in the right retroperitoneal space, lateral to the spine, positioned inferiorly to the liver with close proximity to it, and anteriorly adjacent to the ascending colon.",
+    "Left kidney": "The left kidney is bean-shaped, moderately sized, situated in the left retroperitoneal space adjacent to the vertebral column, slightly below the diaphragm, and maintains close proximity to both structures without direct encroachment.",
+    "Stomach": "The stomach is J-shaped and moderately sized, positioned in the upper left quadrant of the abdomen, lying inferior to the diaphragm, adjacent to the left lobe of the liver on the right, and in close proximity to the spleen on the left.",
+    "Gallbladder": "The gallbladder appears as a pear-shaped, fluid-filled structure positioned beneath the liver, in close proximity to the duodenum and separated from the right kidney by a short anatomical distance.",
+    "Aorta": "In the abdomen, the aorta appears as a round, tubular structure located slightly anterior and to the left of the spine, roughly midway between the spine and the stomach, with its size relatively constant and distinct from surrounding structures."
+  },
+  "case0001_slice106.png": {
+    "Liver": "The liver has an irregular wedge shape and occupies a large portion of the upper right abdomen, positioned just beneath and closely adjacent to the diaphragm, while extending to partially overlie the right kidney, which is located at a slightly lower position and further posterior.",
+    "Spleen": "The spleen appears oval-shaped and moderately sized, situated in the upper left abdomen, superior and slightly lateral to the left kidney while lying just beneath the diaphragm, with close proximity to both structures.",
+    "Pancreas": "The pancreas has an elongated, curved shape and sits horizontally across the retroperitoneum behind the stomach, with the head nestled in the curve of the duodenum, its body and tail extending toward the spleen, positioned anterior to the spine and bordered by major blood vessels and nearby organs like the kidney and intestines.",
+    "Right kidney": "The right kidney, seen in the retroperitoneal space, has a bean-like shape and is positioned vertically; it appears slightly smaller than the liver and lies posteriorly and inferiorly to the liver, adjacent to the ascending colon medially.",
+    "Left kidney": "The left kidney appears bean-shaped and is of typical size, located in the left retroperitoneal space, positioned obliquely and close to the vertebral column, with its upper pole situated near the diaphragm.",
+    "Stomach": "The stomach in this CT image appears as a curved, hollow structure situated in the upper abdomen, with its position immediately below the diaphragm, adjacent to the left lobe of the liver on its right, and near the spleen on its left.",
+    "Gallbladder": "The gallbladder appears as a pear-shaped structure of moderate size positioned directly beneath the liver, situated anterior to the right kidney and in close proximity to the duodenum, which lies slightly medial to it.",
+    "Aorta": "The aorta appears as a circular, tube-like structure of moderate size in the center-left of the abdominal cavity, positioned anterior to the spine and posterior to the stomach, with close proximity to both."
+  },
+  "case0001_slice107.png": {
+    "Liver": "The liver, large and roughly wedge-shaped, occupies most of the upper right abdomen, sits directly beneath the curved diaphragm superiorly, and lies anterior and slightly to the left of the right kidney with minimal separation between these structures.",
+    "Spleen": "The spleen appears as a crescent-shaped organ of moderate size, located in the upper left abdomen beneath the diaphragm, lateral to and slightly posterior to the left kidney.",
+    "Pancreas": "The pancreas has a long, oblong shape and is located horizontally behind the stomach, close to the spine, with its head near the duodenum and tail extending toward the spleen, nestled among surrounding organs like the kidneys.",
+    "Right kidney": "The right kidney is bean-shaped and moderately sized, located in the right retroperitoneal space, slightly inferior and posterior to the liver, and in close proximity to the ascending colon along its medial border.",
+    "Left kidney": "The left kidney has a bean-shaped structure, is moderate in size, positioned in the left retroperitoneal space lateral to the vertebral column, and lies relatively close to the diaphragm superiorly but does not appear directly abutting it.",
+    "Stomach": "The stomach in the image appears as a hollow, curved organ positioned in the upper abdomen, situated just below the diaphragm, adjacent to the liver on its right side and the spleen on its left side, with a moderate spatial relation to each structure.",
+    "Gallbladder": "The gallbladder appears as a small, elongated, sac-like structure positioned beneath the liver, located to the right of the midline, lying closer to the duodenum and relatively anterior to the right kidney.",
+    "Aorta": "In this cross-sectional CT image, the aorta appears as a circular structure of moderate size centrally located in the abdomen, positioned anterior to the spine and posterior to the stomach."
+  },
+  "case0001_slice108.png": {
+    "Liver": "The liver appears to be a large, wedge-shaped organ occupying the upper right abdomen, positioned directly beneath the diaphragm with its superior margin closely apposed, and extending laterally and medially over the right kidney, which is located slightly inferior and posterior to the liver.",
+    "Spleen": "In the upper left abdomen, the spleen appears as a crescent-shaped organ positioned lateral to the stomach, measuring approximately 10-14 cm depending on individual variability, located close to the diaphragm superiorly and sitting adjacent to the upper pole of the left kidney inferiorly with minimal separation.",
+    "Pancreas": "The pancreas, elongated and tapered in shape, is nestled horizontally behind the stomach in the abdominal cavity, closely positioned anterior to the spine, and flanked by surrounding organs such as the kidneys and liver, establishing a central role in the retroperitoneal space.",
+    "Right kidney": "The right kidney, bean-shaped and of typical size, is located in the right retroperitoneal space, closely positioned inferior to the liver and adjacent to the ascending colon.",
+    "Left kidney": "The left kidney appears to be bean-shaped and well-formed, situated in the left retroperitoneal space at an angle relative to the vertebral column, positioned near the lateral border of the spine, closely adjacent to but not in direct contact with the left diaphragm, separated by soft tissue and fat.",
+    "Stomach": "The stomach appears as a curved, elongated structure in the upper abdomen, located beneath the diaphragm, adjacent to the liver on the right, and situated near the spleen on the left, demonstrating its central placement within the abdominal cavity.",
+    "Gallbladder": "The gallbladder appears as a small, elongated, and oval-shaped organ located beneath the liver in the upper right abdomen, positioned anterior to the right kidney and relatively proximal to the duodenum, with the duodenum situated medially to its location.",
+    "Aorta": "The aorta is a round, tubular structure located centrally in the abdomen, anterior to the spine and slightly left of midline, and positioned posterior to the stomach with a relatively short distance separating them."
+  },
+  "case0001_slice109.png": {
+    "Liver": "The liver is a large, wedge-shaped organ occupying the upper right abdomen, closely positioned beneath the diaphragm and separated by a thin margin, while partially overlapping the right kidney with notable proximity.",
+    "Spleen": "The spleen appears as a curved, oval-shaped organ located in the upper left abdomen, positioned near the diaphragm and superior to the left kidney, with minimal space separating it from these structures.",
+    "Pancreas": "The pancreas has a slender, elongated shape located horizontally behind the stomach, positioned close to the spine, nestled between surrounding organs such as the liver, kidneys, and intestines, maintaining a central retroperitoneal orientation.",
+    "Right kidney": "The right kidney is bean-shaped, moderately sized, located in the right retroperitoneal space posterior to the liver, positioned laterally to the ascending colon, and lies in close proximity to both structures.",
+    "Left kidney": "The left kidney is bean-shaped, lies in the left retroperitoneal space lateral to the vertebral column, below the diaphragm, and appears appropriately sized for its position with its superior pole closer to the diaphragm and the vertebral column, while its lower pole tapers further away.",
+    "Stomach": "The stomach is a J-shaped organ of moderate size located in the upper-left quadrant of the abdomen, positioned below the diaphragm, adjacent to the liver on the right and the spleen on the left, with the diaphragm superiorly forming its roof.",
+    "Gallbladder": "The gallbladder, shaped like a small pear, is located beneath the liver on the right side of the abdomen, positioned anterior to the right kidney and adjacent to the medial aspect of the duodenum.",
+    "Aorta": "The aorta appears as a round, tubular structure in the midline of the abdomen, positioned anterior to the spine and posterior to the stomach, with its size being relatively consistent with a large vessel and located in close proximity to these structures."
+  },
+  "case0001_slice110.png": {
+    "Liver": "The liver in this image appears to have a triangular, wedge-like shape, is large and occupies most of the upper right abdomen, positioned directly beneath the diaphragm and adjacent to the right kidney, with minimal space separating these structures.",
+    "Spleen": "The spleen appears as a curved and oval-shaped organ located in the upper left abdomen, positioned lateral to the left kidney and inferior to the diaphragm, with close proximity to both structures.",
+    "Pancreas": "The pancreas has an elongated, tapering shape located horizontally behind the stomach, positioned close to the spine, nestled between the duodenum on its right and the spleen on its left, with its central portion near key blood vessels and surrounded by the kidneys and other abdominal organs.",
+    "Right kidney": "The right kidney appears bean-shaped and normal in size, situated in the right retroperitoneal space, closely positioned below the liver superiorly and in close proximity to the ascending colon anteriorly.",
+    "Left kidney": "The left kidney is bean-shaped, moderately sized, positioned in the left retroperitoneal space near the posterolateral abdominal wall, situated inferior to the diaphragm, and lies adjacent to the vertebral column with its medial border facing the spine at a close distance.",
+    "Stomach": "The stomach appears as a curved, elongated structure located in the upper abdomen, positioned beneath the diaphragm, close to and partially overlapping the liver on the right, and in proximity to the spleen on the left.",
+    "Gallbladder": "The gallbladder appears as a small, elongated, and oval-shaped structure positioned beneath the liver, located relatively close to the duodenum anteriorly and positioned medially and slightly above the right kidney with a moderate spatial separation.",
+    "Aorta": "The aorta in the abdomen appears as a round, tubular structure of moderate size, positioned slightly to the left of midline, anterior to the spine and posterior to the stomach, maintaining close proximity to both."
+  }
+}
