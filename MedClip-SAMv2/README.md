@@ -47,8 +47,8 @@ bash zeroshot_scripts/zeroshot_brain_tumors.sh data/brain_tumors
 Average DSC for test_masks: 0.678948
 Average NSD for test_masks: 0.7261863333333334
 (medclipsamv2) yanggq@yanggq-Dlam:~/project/Few-shot/MedCLIP-SAM$ bash zeroshot_scripts/zeroshot_breast_tumors.sh data/breast_tumors/
-Average DSC for test_masks: 0.03918761061946902
-Average NSD for test_masks: 0.04334778761061947
+Average DSC for test_masks: 0.8225787610619469
+Average NSD for test_masks: 0.8670389380530974
 ```
 去掉--finetuned  参数运行结果：
 ```bash
