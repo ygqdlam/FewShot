@@ -37,6 +37,8 @@ def text_prompts_index(dataset):
         index = ['Prostate']
     elif dataset == "synapse":
         index = ['Spleen', 'Right kidney', 'Left kidney', 'Gallbladder', 'Esophagus', 'Liver', 'Stomach', 'Pancreas']
+    elif dataset == "chaos":
+        index = ['Left Kidney','Right Kidney','Liver','Spleen']
     return index
 
 
