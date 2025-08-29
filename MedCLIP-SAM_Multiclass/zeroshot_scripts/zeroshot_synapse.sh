@@ -35,7 +35,9 @@ python segment-anything/prompt_sam.py \
 --output sam_outputs/${DATASET}/test_masks \
 --model-type vit_h \
 --checkpoint segment-anything/sam_checkpoints/sam_vit_h_4b8939.pth \
---prompts boxes
+--prompts boxes \
+--dataset synapse
+
 """
 
 
