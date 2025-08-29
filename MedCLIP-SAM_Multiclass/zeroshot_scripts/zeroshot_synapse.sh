@@ -6,7 +6,7 @@
 #--finetuned \
 DATASET=$1
 
-"""
+
 python saliency_maps/generate_saliency_maps.py \
 --input-path ${DATASET}/test_images \
 --output-path saliency_map_outputs/${DATASET}/test_masks \
@@ -38,7 +38,6 @@ python segment-anything/prompt_sam.py \
 --prompts boxes \
 --dataset synapse
 
-"""
 
 
 python evaluation/eval_synapse.py \
