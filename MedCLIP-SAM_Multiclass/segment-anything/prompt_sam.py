@@ -126,7 +126,17 @@ parser.add_argument(
     help="Whether to plot the points and boxes in the contours. Default is False.",
 )
 
+parser.add_argument(
+    "--dataset",
+    type=str,
+    required=True,
+    help="Whether to plot the points and boxes in the contours. Default is False.",
+)
+
 parser.add_argument("--device", type=str, default="cuda", help="The device to run generation on.")
+
+
+
 
 def write_mask_to_folder(mask , t_mask, path: str,num_contours) -> None:
     file = t_mask.split("/")[-1]
@@ -178,113 +188,66 @@ def scoremap2bbox(scoremap, multi_contour_eval=False):
 
     return estimated_boxes, contours,num_contours
 
+# -------------------------
+# 1. 从掩码随机选 N 个点
+# -------------------------
+def get_random_points(mask, num_points=50, seed=None):
+    rng = np.random.default_rng(seed)
+    coords_yx = np.argwhere(mask > 0)  # (y, x)
+    if coords_yx.size == 0:
+        return np.empty((0, 2), dtype=np.float32)
+
+    if len(coords_yx) <= num_points:
+        chosen = coords_yx
+    else:
+        idx = rng.choice(len(coords_yx), size=num_points, replace=False)
+        chosen = coords_yx[idx]
+
+    points_xy = np.stack([chosen[:, 1], chosen[:, 0]], axis=1).astype(np.float32)
+    return points_xy
+
+
+# -------------------------
+# 2. 从掩码生成点提示
+# -------------------------
 def get_prompts(mask, args):
-    # List to store bounding boxes and random points
-        bounding_boxes = []
-        all_random_points = []
-        all_input_labels = []
+    pos_random_points = get_random_points(mask, num_points=args.num_points)
+    if pos_random_points.shape[0] == 0:
+        return np.empty((0,2)), np.array([])
 
-        bounding_boxes, contours, num_contours = scoremap2bbox(mask, multi_contour_eval=args.multicontour)
-        
-        if(args.prompts == "boxes"):
-            bounding_boxes = np.array(bounding_boxes)
-            return np.zeros_like(bounding_boxes), np.zeros_like(bounding_boxes), bounding_boxes, num_contours
-    
-        pos_num_points = args.num_points  # number of positive random points to get per contour
-        neg_num_points = args.neg_num_points  # number of negative random points to get per contour
-        pos_random_points = []
-        neg_random_points = []
-        candidate_points = np.argwhere(mask.transpose(1,0) > 0)
-        h,w = mask.shape
-        random_index = np.random.choice(len(candidate_points), pos_num_points, replace=False)
-        pos_random_points = candidate_points[random_index]
+    all_random_points = pos_random_points
+    all_input_labels = np.ones(len(pos_random_points), dtype=np.int32)
 
-        if(args.negative):
-            # Filter some points
-            candidate_points = np.argwhere(mask.transpose(1,0) == 0)
-            random_index = np.random.choice(len(candidate_points), neg_num_points, replace=False)
-            neg_random_points = candidate_points[random_index]
-            all_random_points = np.concatenate([pos_random_points,neg_random_points])
-            all_input_labels = [1]*len(pos_random_points) + [0]*len(neg_random_points)
-        
-        elif(not args.negative):
-            all_random_points = pos_random_points
-            all_input_labels = [1]*len(pos_random_points)
+    # 如果需要负点，可以启用
+    if args.negative:
+        neg_random_points = get_random_points((mask == 0).astype(np.uint8), num_points=args.neg_num_points)
+        if neg_random_points.shape[0] > 0:
+            all_random_points = np.concatenate([pos_random_points, neg_random_points])
+            all_input_labels = np.concatenate([
+                np.ones(len(pos_random_points), dtype=np.int32),
+                np.zeros(len(neg_random_points), dtype=np.int32)
+            ])
 
-        # Convert the lists to NumPy arrays
-        all_random_points = np.array(all_random_points)
-        all_input_labels = np.array(all_input_labels)
-        bounding_boxes = np.array(bounding_boxes)
+    return all_random_points, all_input_labels
 
-        return all_random_points, all_input_labels, bounding_boxes, num_contours
-    
-def get_final_mask(predictor,all_random_points, all_input_labels, 
-                   bounding_boxes, image, args):
-    
-    input_boxes = torch.tensor(bounding_boxes, device=args.device) 
-    input_points = torch.tensor(all_random_points, device=args.device)
-    input_labels = torch.tensor(all_input_labels, device=args.device)
-    input_points = input_points.repeat((len(bounding_boxes),1,1))
-    input_labels = input_labels.repeat((len(bounding_boxes),1))
 
+# -------------------------
+# 3. 只用 points 提示生成 mask
+# -------------------------
+def get_final_mask(predictor, all_random_points, all_input_labels, image, args):
     predictor.set_image(image)
 
-    if(args.prompts == "both"):
-        transformed_boxes = predictor.transform.apply_boxes_torch(input_boxes, image.shape[:2]) 
-        transformed_points = predictor.transform.apply_coords_torch(input_points, image.shape[:2]) 
-        masks, scores, _ = predictor.predict_torch(
-            point_coords=transformed_points,
-            point_labels=input_labels,
-            boxes=transformed_boxes,
-            multimask_output=args.multimask
-        )
-        masks = masks.cpu().numpy()
-        scores = scores.cpu().numpy()
+    masks, scores, _ = predictor.predict(
+        point_coords=all_random_points,
+        point_labels=all_input_labels,
+        multimask_output=args.multimask,
+    )
 
-    elif(args.prompts == "points"):
-        masks, scores, _ = predictor.predict(
-            point_coords=all_random_points,
-            point_labels=all_input_labels,
-            multimask_output=args.multimask,
-        )
-
-    elif(args.prompts == "boxes"):
-        input_boxes = torch.tensor(bounding_boxes, device=args.device)  
-        transformed_boxes = predictor.transform.apply_boxes_torch(input_boxes, image.shape[:2])  
-        masks, scores, _ = predictor.predict_torch(
-            point_coords=None,
-            point_labels=None,
-            boxes=transformed_boxes,
-            multimask_output=args.multimask
-        )
-        masks = masks.cpu().numpy()
-        scores = scores.cpu().numpy()
-
-    if(args.multimask):
-        if(args.voting == "MRM"):
-            scores = np.expand_dims(scores, axis=-1)
-            scores = np.expand_dims(scores, axis=-1)
-            final_mask = (masks * scores).sum(axis=0)
-            final_mask = (final_mask - final_mask.min()) / (final_mask.max() - final_mask.min())
-        elif(args.voting == "STAPLE"):
-            final_mask = []
-            for i in range(masks.shape[0]):
-                seg_sitk = sitk.GetImageFromArray(masks[i].astype(np.int16)) # STAPLE requires we cast into int16 arrays
-                final_mask.append(seg_sitk)
-
-            # Run STAPLE algorithm
-            final_mask_img = sitk.STAPLE(final_mask, 1.0 ) # 1.0 specifies the foreground value
-
-            # convert back to numpy array
-            final_mask = sitk.GetArrayFromImage(final_mask_img)
-
-        elif(args.voting == "AVERAGE"):
-            final_mask = np.mean(masks, axis=0)
+    if args.multimask:
+        best_idx = np.argmax(scores)
+        final_mask = masks[best_idx].astype(float)
     else:
         final_mask = np.squeeze(masks).astype(float)
-
-    if(final_mask.ndim == 3):
-        final_mask = final_mask.sum(axis=0).clip(0, 1)
 
     return final_mask
 
@@ -293,10 +256,9 @@ def get_final_mask(predictor,all_random_points, all_input_labels,
 # Mulitclass
 # 你的 8 个固定类别（保持原样大小写与空格）
 import re
-ORGAN_NAMES = ['Spleen', 'Right kidney', 'Left kidney', 'Gallbladder', 'Esophagus', 'Liver', 'Stomach', 'Pancreas']
 IMG_EXTS = (".png", ".jpg", ".jpeg", ".bmp", ".tif", ".tiff")
 # 8 个类别的固定顺序
-ORGAN_INDEX = {
+ORGAN_SYNAPSE_INDEX = {
     'Spleen': 1,
     'Right kidney': 2,
     'Left kidney': 3,
@@ -306,7 +268,22 @@ ORGAN_INDEX = {
     'Stomach': 7,
     'Pancreas': 8
 }
-def write_merged_mask(all_masks: dict, save_path: str) -> None:
+
+ORGAN_ACDC_INDEX = {
+    'Left Ventricle': 1,
+    'Right Ventricle': 2,
+    'Myocardium': 3
+}
+
+ORGAN_CHAOS_INDEX = {
+    'Liver': 1,
+    'Right Kidney': 2,
+    'Left Kidney': 3,
+    'Spleen': 4,
+}
+
+
+def write_merged_mask(all_masks: dict, save_path: str, ORGAN_INDEX) -> None:
     """
     将 8 个类别的 mask 合并为一个单通道 mask：
       - 输入: all_masks = {organ_name: mask_bool 或 mask_float}
@@ -326,7 +303,6 @@ def write_merged_mask(all_masks: dict, save_path: str) -> None:
         merged[mask_bin == 1] = cls_id
 
     cv2.imwrite(save_path, merged)
-    print(f"[✓] merged mask saved: {save_path}")
 
 def list_files(path):
     if os.path.isdir(path):
@@ -353,6 +329,14 @@ def organ_regex(base, organ):
 
 def main(args: argparse.Namespace) -> None:
     print("Loading SAM...")
+
+    if args.dataset == "synapse":
+        ORGAN_INDEX = ORGAN_SYNAPSE_INDEX
+    elif args.dataset == "acdc":
+        ORGAN_INDEX = ORGAN_ACDC_INDEX
+    elif args.dataset == "chaos":
+        ORGAN_INDEX = ORGAN_CHAOS_INDEX
+    
     device = args.device if (args.device == "cpu" or torch.cuda.is_available()) else "cpu"
     sam = sam_model_registry[args.model_type](checkpoint=args.checkpoint)
     _ = sam.to(device=device)
@@ -363,7 +347,7 @@ def main(args: argparse.Namespace) -> None:
     mask_files = list_files(args.mask_input)
     os.makedirs(args.output, exist_ok=True)
 
-    print("Segmenting images with 8-class prompts...")
+    print("Segmenting images with multi-class prompts...")
     for img_path in tqdm(image_files):
         if not img_path.lower().endswith((".png", ".jpg", ".jpeg")):
             continue
@@ -408,25 +392,16 @@ def main(args: argparse.Namespace) -> None:
             if (mask.shape[0] != H) or (mask.shape[1] != W):
                 mask = cv2.resize(mask, (W, H), interpolation=cv2.INTER_NEAREST)
 
-            # 第二段代码接口：由掩码生成点/框等提示
-            all_random_points, all_input_labels, bounding_boxes, num_contours = get_prompts(mask, args)
 
-            # 第二段代码接口：基于 predictor + 提示 + 图像 生成最终分割
-            final_mask = get_final_mask(
-                predictor,
-                all_random_points,
-                all_input_labels,
-                bounding_boxes,
-                img_rgb,
-                args
-            )
+            all_random_points, all_input_labels = get_prompts(mask, args)
+            final_mask = get_final_mask(predictor, all_random_points, all_input_labels, img_rgb, args)
 
             # 保存单个器官的分割结果
             all_masks[organ] = final_mask  # 保存每个器官的最终 mask
 
         # 合并所有器官的 mask，并保存
         merged_mask_path = os.path.join(args.output, f"{base_name}.png")
-        write_merged_mask(all_masks, merged_mask_path)
+        write_merged_mask(all_masks, merged_mask_path, ORGAN_INDEX)
 
     print("SAM Segmentation Done!")
 
