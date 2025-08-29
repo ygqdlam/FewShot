@@ -36,6 +36,10 @@ https://pan.baidu.com/s/1ONkJTR4nAqa7yk5c_Kl2Ig?pwd=v44v
 bash zeroshot.sh <path/to/dataset>
 bash zeroshot_scripts/zeroshot_brain_tumors.sh data/brain_tumors
 ```
+2025年8月29日更新：
+需要额外添加一个参数：--dataset synapse
+
+
 ### 3.单个类别到多个类别拓展
 
 #### 修改 saliency_maps/generate_saliency_maps.py 文件
@@ -98,6 +102,8 @@ import re
 ORGAN_NAMES = ['Spleen', 'Right kidney', 'Left kidney', 'Gallbladder', 'Esophagus', 'Liver', 'Stomach', 'Pancreas']
 IMG_EXTS = (".png", ".jpg", ".jpeg", ".bmp", ".tif", ".tiff")
 ```
+2025年8月29日更新：
+运行时需要额外添加一个参数：--dataset synapse
 
 #### 修改 evaluation/eval.py 文件
 该文件修改内容过多，已重新写一个文件，eval_synapse.py:
